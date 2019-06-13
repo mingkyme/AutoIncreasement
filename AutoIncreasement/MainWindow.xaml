@@ -4,8 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoIncreasement"
+        xmlns:class="clr-namespace:AutoIncreasement.Class"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed"
         Title="AutoIncreasement" Height="450" Width="800">
+    <Window.Resources>
+        <!--
+        <class:Values x:Key="XAML_Value"/>
+        -->
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -17,7 +25,7 @@
         </Grid.RowDefinitions>
         <!-- Before Area -->
         <TextBlock Grid.Row="0" FontSize="30" Text="Raw Data" HorizontalAlignment="Center"/>
-        <TextBox Grid.Row="1" Name="XAML_Before_Text" FontSize="30" TextChanged="XAML_Before_Text_TextChanged" TextWrapping="Wrap"/>
+        <TextBox Grid.Row="1" Name="XAML_Before_Text" FontSize="30" TextChanged="XAML_Text_Changed" TextWrapping="Wrap" AcceptsTab="True" AcceptsReturn="True"/>
         <!-- Variable Area -->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -32,12 +40,21 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" Text="{Binding Variable, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <TextBox Grid.Column="1" Text="{Binding Interval, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <TextBox Grid.Column="0" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextChanged="XAML_Text_Changed">
+                <TextBox.Text>
+                    <!--<Binding Source="{StaticResource XAML_Value}" Path="Variable" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>-->
+                    <Binding Path="Variable" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="1" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextChanged="XAML_Text_Changed">
+                <TextBox.Text>
+                    <!--<Binding Source="{StaticResource XAML_Value}" Path="Interval" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/> -->
+                    <Binding Path="Interval" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                </TextBox.Text>
+            </TextBox>
         </Grid>
         <!-- After Area -->
         <TextBlock Grid.Row="4" FontSize="30" Text="Expected Data" HorizontalAlignment="Center"/>
         <TextBlock Grid.Row="5" Name="XAML_After_Text" FontSize="30" TextWrapping="Wrap"/>
-        
     </Grid>
 </Window>
