@@ -5,4 +5,4 @@ Whenever you paste, value is added one
 Value express
 | input | output |
 |---|---|
-| var num${0} = ${{0}+1}; | var num0 = 1; |
+| var num${0} = ${${0}+1}; | var num0 = 1; |
